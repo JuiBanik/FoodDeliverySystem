@@ -3,11 +3,14 @@ import com.example.ooad.jpa.UserRepository;
 import com.example.ooad.jpa.entity.User;
 import com.example.ooad.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.http.ResponseEntity;
+
 
 
 @Controller
@@ -35,5 +38,22 @@ public class UserLoginController
         }
         model.addAttribute("message", "Incorrect username or password.");
         return "user_login";
+    }
+
+    @PostMapping("/signup")
+    //public ResponseEntity<String> signup(@ModelAttribute User user)
+    public String signup(@ModelAttribute User user, Model model)
+    {
+        // Checking if the username is already taken
+//        if (userRepository.findByUserName(user.getUserName()) != null)
+//        {
+//            return ResponseEntity.badRequest().body("Username Already Exists");
+//        }
+
+        // Saving the user to the database
+        userRepository.save(user);
+        //return ResponseEntity.ok("User Registered Successfully");
+        model.addAttribute("username", user.getUserName());
+        return "User_home";
     }
 }

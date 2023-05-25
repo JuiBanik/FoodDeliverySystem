@@ -6,14 +6,32 @@
     <title>User Login</title>
 </head>
 
-<body>
-<p th:text="${message}" />
-<form action="/user_login" method="post">
-    UserName:<input type="text" name="userName"/>
-    <br/><br/>
-    Password:<input type="password" name="password"/>
-    <br/><br/>
-    <input type="submit" value="login"/>
-</form>
-</body>
+    <body>
+
+        <form action="/user_login" method="post">
+            UserName:<input type="text" name="userName"/>
+            <br/><br/>
+            Password:<input type="password" name="password"/>
+            <br/><br/>
+            <input type="submit" value="login"/>
+        </form>
+
+        <p th:text="${message}" />
+        <br/>
+        <br/>
+        <br/>
+    <form action="/signup" method="post">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="userName" name="userName" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <input type="submit" value="Sign Up">
+        </div>
+    </form>
+    </body>
 </html>
