@@ -13,7 +13,7 @@ public class Menu {
 
     private String menuName;
 
-    @OneToMany( targetEntity=Item.class, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany( targetEntity=Item.class, fetch = FetchType.EAGER)
     private List<Item> itemList;
 
     public Menu(String menuName) {
