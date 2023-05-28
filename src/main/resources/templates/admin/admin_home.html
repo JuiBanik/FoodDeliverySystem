@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Home</title>
+</head>
+<body>
+    <p th:text="'Welcome ' + ${username}" />
+
+    <form action="/admin_home" method="post">
+
+        <td><input type="submit" name="action" value="View/Manage Menu" /></td>
+        <td><input type="submit" name="action" value="View/Manage Orders" /></td>
+        </tr>
+
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Manage Menu</title>
+</head>
+<body>
+<p th:text="'Welcome ' + ${username}" />
+
+<form action="/admin_manage_menu" method="post">
+
+  <td><input type="submit" name="action" value="Add Menu" /></td>
+  <td><input type="submit" name="action" value="Add Item" /></td>
+  <td><input type="submit" name="action" value="Delete Menu" /></td>
+  <td><input type="submit" name="action" value="Delete Item" /></td>
+  </tr>
+
+</form>
+
+
+</body>
+</html>

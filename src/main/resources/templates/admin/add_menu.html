@@ -1,6 +1,6 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Getting Started: Handling Form Submission</title>
@@ -10,10 +10,10 @@
 <body>
 <h1>Admin Menu Page</h1>
 
-<form action="/menu" method="post">
+<form action="/add_menu" method="post">
     Menu Name:<input type="text" name="menuName"/>
     <br/><br/>
-    <input type="submit" value="Create"/>
+    <input type="submit" value="Add Menu"/>
 </form>
 
 </body>

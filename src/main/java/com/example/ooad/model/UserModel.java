@@ -1,5 +1,8 @@
 package com.example.ooad.model;
 
+/**
+ * This class is used to store information entered by the user on webpage and pass it to Controller.
+ */
 public class UserModel {
     private String userName;
     private String password;

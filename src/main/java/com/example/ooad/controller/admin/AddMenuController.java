@@ -1,4 +1,4 @@
-package com.example.ooad.controller;
+package com.example.ooad.controller.admin;
 
 import com.example.ooad.jpa.entity.Menu;
 import com.example.ooad.jpa.MenuRepository;
@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class MenuController {
+public class AddMenuController {
     @Autowired
     private MenuRepository menuRepository;
 
-    @GetMapping("/menu")
+    @GetMapping("/add_menu")
     public String getMenuPage(Model model) {
-        return "menu";
+        return "admin/add_menu";
     }
 
-    @PostMapping("/menu")
+    @PostMapping("/add_menu")
     public String submitNewMenu(@ModelAttribute MenuModel menuModel, Model model) {
         Menu menu = new Menu(menuModel.getMenuName());
         Menu savedMenu = menuRepository.save(menu);
         model.addAttribute("menuId", savedMenu.getId());
-        return "menu_result";
+        return "admin/add_menu_result";
     }
 }

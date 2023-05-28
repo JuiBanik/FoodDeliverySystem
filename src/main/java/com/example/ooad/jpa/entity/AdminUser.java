@@ -2,6 +2,10 @@ package com.example.ooad.jpa.entity;
 
 import jakarta.persistence.*;
 
+/**
+ * This Java class is responsible for interacting with the table in database and it also creates the table if it
+ * does not exist using the class definition. Table name is defined by @Table (name = XXXX) annotation.
+ */
 @Entity
 @Table(name = "adminuser")
 public class AdminUser {

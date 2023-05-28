@@ -1,11 +1,10 @@
 package com.example.ooad.jpa;
 
+import com.example.ooad.jpa.entity.Item;
 import com.example.ooad.jpa.entity.Menu;
 import org.springframework.data.repository.CrudRepository;
-
-public interface MenuRepository extends CrudRepository<Menu, Long> {
-
+public interface ItemRepository extends CrudRepository<Item, Long>{
     Menu findById(long id);
 
-    Menu findByMenuName(String menuName);
+    Item findByItemName(String itemName);
 }

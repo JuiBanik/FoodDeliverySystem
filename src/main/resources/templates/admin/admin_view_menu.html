@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>View/Manage Menu Page</title>
+    <style>
+      table,
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+    </style>
+</head>
+<body>
+    <h1> Our Menu:</h1>
+    <th:block th:each="menu : ${menuList}">
+        <h2><th:block th:text="${menu.menuName}"></th:block></h2>
+        <table class="table" id="slot-table-1">
+            <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Item Price</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${menu.itemList}">
+                    <td th:text="${item.itemName}"></td>
+                    <td th:text="${item.itemPrice}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </th:block>
+
+    <form action="/admin_view_menu" method="post">
+        <input type="submit" value="Manage Menu"/>
+    </form>
+
+</body>
+</html>
