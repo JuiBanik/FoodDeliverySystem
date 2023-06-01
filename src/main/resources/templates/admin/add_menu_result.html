@@ -3,11 +3,48 @@
 <head>
     <title>Getting Started: Handling Form Submission</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+    /* Custom CSS for background image */
+    body {
+      background-image: url('https://media.istockphoto.com/id/498614360/photo/done-text-and-check-mark.jpg?s=612x612&w=0&k=20&c=gotPiuya4TZ7hmPdYntkSgy0Djl7D6m_-xdJRCkKshA=');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    /* Custom CSS for heading */
+    h1 {
+      font-size: 28px;
+      color: #333;
+      margin-top: 20px;
+    }
+    /* Custom CSS for paragraphs */
+    p {
+      font-size: 18px;
+      color: #555;
+    }
+    /* Custom CSS for links */
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    /* Custom CSS for links on hover */
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-<h1>Result</h1>
-<p> Created Menu successfully!</p>
-<p th:text="'id: ' + ${menuId}" />
-<a href="/addMenu">Create another menu</a>
+<div class="container">
+    <h1>Result</h1>
+    <p>Created Menu successfully!</p>
+    <p th:text="'id: ' + ${menuId}"></p>
+    <a href="/addMenu">Create another menu</a>
+</div>
+
+<!-- Add Bootstrap JavaScript scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+L3Zy63g6Z/jhTGj5xYx3GPHB/p8Ips3lGz8Y7p2X6Jwte" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

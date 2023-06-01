@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>View/Manage Menu Page</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-      table,
-      th,
-      td {
-        padding: 10px;
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
+        /* Custom CSS for background image */
+        body {
+            background-image: url('https://classicbakes.com/sites/default/files/styles/og_image_1200/public/2022-07/nutella-stuffed-pancakes.jpg?itok=4Cov_Zka');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
     </style>
 </head>
 <body>
-    <h1> Our Menu:</h1>
-    <th:block th:each="menu : ${menuList}">
-        <h2><th:block th:text="${menu.menuName}"></th:block></h2>
+<div class="container">
+    <h1 class="text-center">Our Menu:</h1>
+    <div th:each="menu : ${menuList}">
+        <h2 th:text="${menu.menuName}"></h2>
         <table class="table" id="slot-table-1">
             <thead>
             <tr>
@@ -25,17 +27,22 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:each="item : ${menu.itemList}">
-                    <td th:text="${item.itemName}"></td>
-                    <td th:text="${item.itemPrice}"></td>
-                </tr>
+            <tr th:each="item : ${menu.itemList}">
+                <td th:text="${item.itemName}"></td>
+                <td th:text="${item.itemPrice}"></td>
+            </tr>
             </tbody>
         </table>
-    </th:block>
+    </div>
+</div>
 
-    <form action="/admin_view_menu" method="post">
-        <input type="submit" value="Manage Menu"/>
-    </form>
+<form action="/admin_view_menu" method="post">
+    <div class="text-center mt-4">
+        <input type="submit" value="Manage Menu" class="btn btn-primary">
+    </div>
+</form>
 
+<!-- Add Bootstrap JavaScript scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

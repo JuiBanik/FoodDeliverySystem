@@ -3,13 +3,20 @@ package com.example.ooad.model;
 /**
  * This class is used to store information entered by the user on webpage and pass it to Controller.
  */
-public class UserModel {
+public class UserSignupModel {
     private String userName;
     private String password;
+    private String email;
 
-    public UserModel(String userName, String password) {
+
+
+    private String phoneNumber;
+
+    public UserSignupModel(String userName, String password, String email, String phoneNumber) {
         this.userName = userName;
         this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
     public String getUsername() {
         return userName;
@@ -19,4 +26,12 @@ public class UserModel {
         return password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }
+

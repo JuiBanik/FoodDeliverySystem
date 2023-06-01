@@ -4,8 +4,163 @@
 <head>
   <meta charset="UTF-8">
   <title>User Home</title>
+  <!-- Add Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    /* Custom CSS for background image */
+    body {
+      background-image: url('https://media.istockphoto.com/id/925256408/photo/spaghetti-with-fresh-tomato-sauce-mozzarella-and-basil.webp?b=1&s=170667a&w=0&k=20&c=64M02FB_FWGTWXMvcZ3N6KbdJzXbvFstmmLIcqMZfRE=');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    /* Custom CSS for headings */
+    h1 {
+      font-size: 28px;
+      color: white;
+      margin-top: 20px;
+    }
+    h2 {
+      font-size: 24px;
+      color: white;
+      margin-top: 15px;
+    }
+    /* Custom CSS for paragraphs */
+    p {
+      font-size: 18px;
+      color: white;
+    }
+    /* Custom CSS for tables */
+    table {
+      margin-top: 20px;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid black;
+      text-align: left;
+    }
+    td {
+      color: white;
+    }
+    th {
+      background-color: #f2f2f2;
+      color: black;
+    }
+    /* Custom CSS for buttons */
+    input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    /* Custom CSS for buttons on hover */
+    input[type="submit"]:hover {
+      background-color: #0069d9;
+    }
+    .logout-link {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            color: #FFFFFF;
+    }
+  </style>
 </head>
 <body>
-<p th:text="'Welcome ' + ${username}" />
+<!-- Include the navigation bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">CrunchBerry</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/user_home">Menu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user_view_order">My Orders</a>
+      </li>
+    </ul>
+  </div>
+  <div class="navbar-text">
+    <span class="text-light">Welcome, <span th:text="${username}"></span> !</span>
+    <a class="btn btn-link text-light" href="/user_logout">Logout</a>
+  </div>
+</nav>
+
+<div class="container">
+  <p th:text="${message}"></p>
+
+  <h1>Our Menu:</h1>
+  <div th:each="menu : ${menuList}">
+    <h2 th:text="${menu.menuName}"></h2>
+    <table class="table" id="slot-table-1">
+      <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Item Price</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="item : ${menu.itemList}">
+        <td th:text="${item.itemName}"></td>
+        <td th:text="${item.itemPrice}"></td>
+        <td>
+          <form action="/add_to_cart" method="post">
+            <input type="hidden" name="itemName" th:value="${item.itemName}">
+            <input type="hidden" name="menuName" th:value="${menu.menuName}">
+            <input type="submit" value="Add to Cart" class="btn btn-primary">
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h1>Your Cart:</h1>
+  <table class="table" id="slot-table-2">
+    <thead>
+    <tr>
+      <th>Cart Item Name</th>
+      <th>Cart Item Quantity</th>
+      <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cartItem : ${cartItemList}">
+      <td th:text="${cartItem.item.itemName}"></td>
+      <td th:text="${cartItem.quantity}"></td>
+      <td th:text="${cartItem.quantity * cartItem.item.itemPrice}"></td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td>
+        <strong>
+          <span th:text="${totalQuantity}"></span>
+        </strong>
+      </td>
+      <td>
+        <strong>
+          <span th:text="${totalPrice}"></span>
+        </strong>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <form action="/checkout_cart" method="get">
+    <input type="submit" value="Checkout" class="btn btn-primary">
+  </form>
+</div>
+
+<!-- Add Bootstrap JavaScript scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+L3Zy63g6Z/jhTGj5xYx3GPHB/p8Ips3lGz8Y7p2X6Jwte" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

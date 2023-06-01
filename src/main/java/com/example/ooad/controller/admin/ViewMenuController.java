@@ -24,10 +24,6 @@ public class ViewMenuController {
         Iterable<Menu> menuList = menuRepository.findAll();
         model.addAttribute("menuList", menuList);
 
-        System.out.println("Fetching items from database");
-        Iterable<Item> itemList = itemRepository.findAll();
-        model.addAttribute("itemList", itemList);
-
         return "admin/admin_view_menu"; //name of view/html page to be loaded
     }
 

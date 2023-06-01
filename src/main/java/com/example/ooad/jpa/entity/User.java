@@ -10,14 +10,37 @@ public class User
     private Long id;
     private String userName;
     private String password;
-    private String orderDetail;
-    private String orderCurrentStatus;
+    private String email;
+    private String phoneNumber;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+
 
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
-
+    public User(String userName, String password, String email, String phoneNumber) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
     public void setId(Long id) {
         this.id = id;
     }
