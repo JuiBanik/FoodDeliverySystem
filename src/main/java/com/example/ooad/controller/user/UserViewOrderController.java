@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -36,13 +37,15 @@ public class UserViewOrderController {
         List<Orders>  completedOrders = new ArrayList<>();
 
         ordersList.forEach( orders -> {
-            if(orders.getOrderStatus().equals("complete")){
+            if(orders.getOrderStatus().equalsIgnoreCase("complete")){
                 completedOrders.add(orders);
             }
             else{
                 activeOrders.add(orders);
             }
         });
+        activeOrders.sort(Comparator.comparing(Orders::getOrderDate).reversed());
+        completedOrders.sort(Comparator.comparing(Orders::getOrderDate).reversed());
 
         model.addAttribute("activeOrders", activeOrders);
 

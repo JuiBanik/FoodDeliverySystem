@@ -1,22 +1,19 @@
 package com.example.ooad.controller.admin;
-import com.example.ooad.jpa.MenuRepository;
+
 import com.example.ooad.jpa.OrdersRepository;
-import com.example.ooad.jpa.UserRepository;
-import com.example.ooad.jpa.entity.CartItem;
-import com.example.ooad.jpa.entity.Menu;
 import com.example.ooad.jpa.entity.Orders;
 import com.example.ooad.model.OrderModel;
-import com.example.ooad.model.UserModel;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
+
+import static com.example.ooad.controller.Constants.USERNAME_ATTRIBUTE_NAME;
 
 @Controller
 public class ViewOrdersController {
@@ -25,7 +22,8 @@ public class ViewOrdersController {
 
 
     @GetMapping("/admin_view_orders")
-    public String getAdminViewOrdersPage(Model model) {
+    public String getAdminViewOrdersPage(Model model, HttpSession httpSession) {
+        model.addAttribute(USERNAME_ATTRIBUTE_NAME, httpSession.getAttribute(USERNAME_ATTRIBUTE_NAME));
         Iterable<Orders> ordersList = ordersRepository.findAll();
         model.addAttribute("ordersList", ordersList);
         return "admin/admin_view_orders"; //name of view/html page to be loaded
@@ -36,9 +34,11 @@ public class ViewOrdersController {
 
     @PostMapping("/admin_update_order_status")
     public String postAdminUpdateOrderStatus(Model model,
-                                             @ModelAttribute OrderModel orderModel) {
+                                             @ModelAttribute OrderModel orderModel,
+                                             HttpSession httpSession) {
         System.out.println(orderModel.getOrderId());
         System.out.println(orderModel.getOrderStatus());
+        model.addAttribute(USERNAME_ATTRIBUTE_NAME, httpSession.getAttribute(USERNAME_ATTRIBUTE_NAME));
         Optional<Orders> ordersOptional = ordersRepository.findById(orderModel.getOrderId());
         if (!ordersOptional.isPresent()) {
             return "redirect:admin_view_orders";

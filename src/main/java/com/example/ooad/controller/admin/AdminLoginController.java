@@ -3,13 +3,15 @@ package com.example.ooad.controller.admin;
 import com.example.ooad.jpa.entity.AdminUser;
 import com.example.ooad.jpa.AdminUserRepository;
 import com.example.ooad.model.UserModel;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import static com.example.ooad.controller.Constants.USERNAME_ATTRIBUTE_NAME;
 
 @Controller
 public class AdminLoginController {
@@ -41,9 +43,8 @@ public class AdminLoginController {
     @PostMapping("/admin_login")
     public String submitAdminLogin(@ModelAttribute UserModel userModel,
                                    Model model,
-                                   RedirectAttributes redirectAttributes) {
+                                   HttpSession httpSession) {
         System.out.println(userModel.getUsername());
-        System.out.println(userModel.getPassword());
         //The below call finds this user by userName in database and returns AdminUser entity object.
         AdminUser adminUser = adminUserRepository.findByUserName(userModel.getUsername());
         if (adminUser == null ) {
@@ -51,12 +52,18 @@ public class AdminLoginController {
         }
         if (adminUser!= null && adminUser.getPassword().equals(userModel.getPassword())) {
             //Login successful, returning admin_home page with username variable set in the Model.
-            redirectAttributes.addAttribute("username", adminUser.getUserName());
+            httpSession.setAttribute(USERNAME_ATTRIBUTE_NAME, adminUser.getUserName());
             return "redirect:admin_home";
         }
         //Login failed, returning admin_login page with message variable set in Model.
         model.addAttribute("message", "Incorrect username or password.");
         return "admin/admin_login";
+    }
+
+    @GetMapping("/admin_logout")
+    public String logoutAdmin(HttpSession httpSession) {
+        httpSession.invalidate();
+        return "redirect:admin_login";
     }
 
 }

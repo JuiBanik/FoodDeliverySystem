@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.example.ooad.jpa.entity.CartItem.PENDING_CART_STATUS;
@@ -43,6 +44,10 @@ public class UserHomeController {
 
         System.out.println("Fetching menu from database");
         Iterable<Menu> menuList = menuRepository.findAll();
+        List<Menu> menuListSored = new ArrayList<>();
+        menuList.forEach(menu -> menuListSored.add(menu));
+        menuListSored.sort(Comparator.comparing(Menu::getMenuName));
+
         model.addAttribute("menuList", menuList);
         model.addAttribute("message", message);
 

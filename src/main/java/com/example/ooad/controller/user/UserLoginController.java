@@ -39,7 +39,7 @@ public class UserLoginController
                                   HttpSession session,
                                   Model model) {
         System.out.println(userModel.getUsername());
-        System.out.println(userModel.getPassword());
+        //System.out.println(userModel.getPassword());
         User user = userRepository.findByUserName(userModel.getUsername());
         if (user == null ) {
             System.out.println("No User Found");

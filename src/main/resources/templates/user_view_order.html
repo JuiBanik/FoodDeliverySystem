@@ -177,6 +177,7 @@
     <thead class="thead-dark">
     <tr>
       <th>Order Id</th>
+      <th>Order Date</th>
       <th>Items Ordered</th>
       <th>Total Cost</th>
       <th>Status</th>
@@ -185,6 +186,7 @@
     <tbody>
     <tr th:each="orders : ${activeOrders}">
       <td th:text="${orders.orderId}"></td>
+      <td th:text="${orders.orderDate}"></td>
       <td>
         <ul>
           <li th:each="cartItem : ${orders.checkoutItemList}" th:text="${cartItem.item.itemName}"></li>

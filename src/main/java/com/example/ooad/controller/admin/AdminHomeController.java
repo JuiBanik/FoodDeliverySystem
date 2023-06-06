@@ -1,17 +1,20 @@
 package com.example.ooad.controller.admin;
 import com.example.ooad.model.UserModel;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import static com.example.ooad.controller.Constants.USERNAME_ATTRIBUTE_NAME;
 
 
 @Controller
 public class AdminHomeController {
     @GetMapping("/admin_home")
-    public String getAdminLoginPage(@RequestParam("username") String userName,
+    public String getAdminLoginPage(HttpSession httpSession,
                                     Model model) {
-        model.addAttribute("username", userName);
+        String userName = (String) httpSession.getAttribute("username");
+        model.addAttribute(USERNAME_ATTRIBUTE_NAME, userName);
         return "admin/admin_home"; //name of view/html page to be loaded
     }
 
